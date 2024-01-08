@@ -5,15 +5,14 @@ import { db } from "../../utils/db.server.js";
 
 class ProductRepo {
 
-    createProduct = async (product: Omit<Product, 'id'>): Promise<Product | null> => {
-        const { title, description, createdAt, category, price } = product;
+    createProduct = async (product: Omit<Product, 'id'|'createdAt'>): Promise<Product | null> => {
+        const { title, description, category, price } = product;
 
         try {
             const createdProduct = await db.product.create({
                 data: {
                     title,
                     description,
-                    createdAt,
                     category,
                     price,
                 },
@@ -35,7 +34,7 @@ class ProductRepo {
     };
 
 
-    getAllProducts = async() : Promise<Product> =>{
+    getAllProducts = async() : Promise<Product[]> =>{
         try {
             return db.Product.findMany();
         } catch (error) {
