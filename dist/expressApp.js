@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import express from "express";
 import cors from "cors";
-import { Products } from "./src/api/product.js";
+import { Products } from "./api/product.js";
 export const expressApp = (app) => __awaiter(void 0, void 0, void 0, function* () {
     app.use(express.json({ limit: '1mb' }));
     app.use(express.urlencoded({ extended: true, limit: '1mb' }));

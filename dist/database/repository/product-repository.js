@@ -11,13 +11,12 @@ import { db } from "../../utils/db.server.js";
 class ProductRepo {
     constructor() {
         this.createProduct = (product) => __awaiter(this, void 0, void 0, function* () {
-            const { title, description, createdAt, category, price } = product;
+            const { title, description, category, price } = product;
             try {
                 const createdProduct = yield db.product.create({
                     data: {
                         title,
                         description,
-                        createdAt,
                         category,
                         price,
                     },
