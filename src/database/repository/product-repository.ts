@@ -17,7 +17,7 @@ class ProductRepo {
                     price,
                 },
                 select: {
-                    _id: true,
+                    id: true,
                     title: true,
                     description: true,
                     createdAt: true,
@@ -36,7 +36,7 @@ class ProductRepo {
 
     getAllProducts = async() : Promise<Product[]> =>{
         try {
-            return db.Product.findMany();
+            return db.product.findMany();
         } catch (error) {
             console.log(error);
             throw error;

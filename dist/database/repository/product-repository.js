@@ -21,7 +21,7 @@ class ProductRepo {
                         price,
                     },
                     select: {
-                        _id: true,
+                        id: true,
                         title: true,
                         description: true,
                         createdAt: true,
@@ -38,7 +38,7 @@ class ProductRepo {
         });
         this.getAllProducts = () => __awaiter(this, void 0, void 0, function* () {
             try {
-                return db.Product.findMany();
+                return db.product.findMany();
             }
             catch (error) {
                 console.log(error);

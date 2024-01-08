@@ -13,6 +13,7 @@ class ProductService {
     constructor() {
         this.CreateProduct = (ProductInput) => __awaiter(this, void 0, void 0, function* () {
             try {
+                console.log(ProductInput);
                 const productRes = yield this.repo.createProduct(ProductInput);
                 return returnData(productRes);
             }

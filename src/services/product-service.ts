@@ -17,6 +17,8 @@ class ProductService {
     CreateProduct = async(ProductInput : Omit<Product,"createdAt"|"id">) : Promise<Product | null>  =>{
         try {
 
+            console.log(ProductInput);
+
             const productRes = await this.repo.createProduct(ProductInput);
             return returnData(productRes);
             
