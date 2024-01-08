@@ -1,13 +1,12 @@
 import express from "express";
-import { db } from "./utils/db.server.js";
+import { expressApp } from "../expressApp.js";
 
 const startServer = async () => {
 
 
     const app = express();
 
-
-
+    await expressApp(app);
 
     const PORT = 3000;
 
@@ -17,6 +16,7 @@ const startServer = async () => {
             console.log(`the server is running on port ${PORT}.../`)
         }
     )
+
 }
 
 
