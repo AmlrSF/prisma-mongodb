@@ -1,22 +1,23 @@
 import express from "express";
 import { db } from "./utils/db.server.js";
 
-const app = express();
+const startServer = async () => {
+
+
+    const app = express();
 
 
 
 
-app.get("/",(req,res)=>{
-    res.send("HELLO Blud");
-})
+    const PORT = 3000;
 
-console.log("cc");
+    app.listen(
+        PORT,
+        () => {
+            console.log(`the server is running on port ${PORT}.../`)
+        }
+    )
+}
 
-const PORT = 3000;
 
-app.listen(
-    PORT,
-    ()=>{
-        console.log(`the server is running on port ${PORT}.../`)
-    }
-)
+startServer();
