@@ -36,23 +36,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.expressApp = void 0;
 var express_1 = require("express");
-var expressApp_js_1 = require("../expressApp.js");
-var startServer = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var app, PORT;
+var cors_1 = require("cors");
+var product_js_1 = require("./src/api/product.js");
+var expressApp = function (app) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                app = (0, express_1.default)();
-                return [4 /*yield*/, (0, expressApp_js_1.expressApp)(app)];
-            case 1:
-                _a.sent();
-                PORT = 3000;
-                app.listen(PORT, function () {
-                    console.log("the server is running on port ".concat(PORT, ".../"));
-                });
-                return [2 /*return*/];
-        }
+        app.use(express_1.default.json({ limit: '1mb' }));
+        app.use(express_1.default.urlencoded({ extended: true, limit: '1mb' }));
+        app.use((0, cors_1.default)());
+        //api
+        (0, product_js_1.Products)(app);
+        return [2 /*return*/];
     });
 }); };
-startServer();
+exports.expressApp = expressApp;

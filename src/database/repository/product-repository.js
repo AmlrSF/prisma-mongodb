@@ -36,23 +36,59 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
-var expressApp_js_1 = require("../expressApp.js");
-var startServer = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var app, PORT;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                app = (0, express_1.default)();
-                return [4 /*yield*/, (0, expressApp_js_1.expressApp)(app)];
-            case 1:
-                _a.sent();
-                PORT = 3000;
-                app.listen(PORT, function () {
-                    console.log("the server is running on port ".concat(PORT, ".../"));
-                });
+var db_server_js_1 = require("../../utils/db.server.js");
+var ProductRepo = /** @class */ (function () {
+    function ProductRepo() {
+        var _this = this;
+        this.createProduct = function (product) { return __awaiter(_this, void 0, void 0, function () {
+            var title, description, category, price, createdProduct, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        title = product.title, description = product.description, category = product.category, price = product.price;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, db_server_js_1.db.product.create({
+                                data: {
+                                    title: title,
+                                    description: description,
+                                    category: category,
+                                    price: price,
+                                },
+                                select: {
+                                    _id: true,
+                                    title: true,
+                                    description: true,
+                                    createdAt: true,
+                                    category: true,
+                                    price: true,
+                                },
+                            })];
+                    case 2:
+                        createdProduct = _a.sent();
+                        return [2 /*return*/, createdProduct];
+                    case 3:
+                        error_1 = _a.sent();
+                        console.error(error_1);
+                        throw error_1;
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); };
+        this.getAllProducts = function () { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                try {
+                    return [2 /*return*/, db_server_js_1.db.Product.findMany()];
+                }
+                catch (error) {
+                    console.log(error);
+                    throw error;
+                }
                 return [2 /*return*/];
-        }
-    });
-}); };
-startServer();
+            });
+        }); };
+    }
+    return ProductRepo;
+}());
+exports.default = ProductRepo;

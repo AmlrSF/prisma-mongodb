@@ -36,23 +36,57 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
-var expressApp_js_1 = require("../expressApp.js");
-var startServer = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var app, PORT;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                app = (0, express_1.default)();
-                return [4 /*yield*/, (0, expressApp_js_1.expressApp)(app)];
-            case 1:
-                _a.sent();
-                PORT = 3000;
-                app.listen(PORT, function () {
-                    console.log("the server is running on port ".concat(PORT, ".../"));
-                });
-                return [2 /*return*/];
-        }
-    });
-}); };
-startServer();
+var index_js_1 = require("../database/index.js");
+var index_js_2 = require("../utils/index.js");
+var ProductService = /** @class */ (function () {
+    function ProductService() {
+        var _this = this;
+        this.CreateProduct = function (ProductInput) { return __awaiter(_this, void 0, void 0, function () {
+            var productRes, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.repo.createProduct(ProductInput)];
+                    case 1:
+                        productRes = _a.sent();
+                        return [2 /*return*/, (0, index_js_2.returnData)(productRes)];
+                    case 2:
+                        error_1 = _a.sent();
+                        console.log(error_1);
+                        return [2 /*return*/, null];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); };
+        this.getAllProducts = function () { return __awaiter(_this, void 0, void 0, function () {
+            var prodsResults, categories_1, uniqueCategories, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.repo.getAllProducts()];
+                    case 1:
+                        prodsResults = _a.sent();
+                        categories_1 = {};
+                        prodsResults.forEach(function (product) {
+                            categories_1[product.category] = product;
+                        });
+                        uniqueCategories = Object.keys(categories_1);
+                        return [2 /*return*/, {
+                                prodsResults: prodsResults,
+                                categories: uniqueCategories,
+                            }];
+                    case 2:
+                        error_2 = _a.sent();
+                        console.error(error_2);
+                        return [2 /*return*/, null];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); };
+        this.repo = new index_js_1.ProductRepo();
+    }
+    return ProductService;
+}());
+exports.default = ProductService;

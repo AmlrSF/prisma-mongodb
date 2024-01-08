@@ -36,23 +36,52 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
-var expressApp_js_1 = require("../expressApp.js");
-var startServer = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var app, PORT;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                app = (0, express_1.default)();
-                return [4 /*yield*/, (0, expressApp_js_1.expressApp)(app)];
-            case 1:
-                _a.sent();
-                PORT = 3000;
-                app.listen(PORT, function () {
-                    console.log("the server is running on port ".concat(PORT, ".../"));
-                });
-                return [2 /*return*/];
-        }
-    });
-}); };
-startServer();
+exports.Products = void 0;
+var product_service_js_1 = require("../services/product-service.js");
+var Products = function (app) {
+    var productService = new product_service_js_1.default();
+    app.get("/products", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var products, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, productService.getAllProducts()];
+                case 1:
+                    products = _a.sent();
+                    res.json(products);
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_1 = _a.sent();
+                    console.error(error_1);
+                    res.status(500).json({ error: "Internal Server Error" });
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    }); });
+    app.post("/products", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var productInput, createdProduct, error_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    productInput = req.body;
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, productService.CreateProduct(productInput)];
+                case 2:
+                    createdProduct = _a.sent();
+                    res.json(createdProduct);
+                    return [3 /*break*/, 4];
+                case 3:
+                    error_2 = _a.sent();
+                    console.error(error_2);
+                    res.status(500).json({ error: "Internal Server Error" });
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    }); });
+};
+exports.Products = Products;
