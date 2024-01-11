@@ -1,4 +1,4 @@
-import { promises } from "dns";
+
 import { Product } from "../../types/index.js";
 import { db } from "../../utils/db.server.js";
 
@@ -35,12 +35,14 @@ class ProductRepo {
 
 
     getAllProducts = async() : Promise<Product[]> =>{
+
         try {
             return db.product.findMany();
         } catch (error) {
             console.log(error);
             throw error;
         }
+
     }
 
 
